@@ -1,22 +1,40 @@
-# 📬 Automated Email Scraper and CSV Export Tool
+# 🕵️ Email Scraper Dashboard
 
-This project is a simple Python tool that scrapes public email addresses from a list of websites and saves the results to a CSV file. It helps automate the tedious task of gathering contact info for business outreach or research.
-
----
-
-## ✅ Features
-
-- Extracts email addresses from websites in `urls.txt`
-- Automatically saves results to `scraped_emails.csv`
-- Includes timestamp and source URL for each email
-- Handles errors and skips inaccessible pages
-- Optional integration with [Hunter.io](https://hunter.io) API (via `hunter.py`)
+This project is a web-based tool for **automatically extracting email addresses** from public websites. It combines **Python web scraping**, a **Django web dashboard**, and **PostgreSQL** storage. It's great for practicing full-stack development, backend skills, and real-world automation.
 
 ---
 
-## 🧪 How to Use
+## 🔍 Features
 
-### 1. Install dependencies
+- ✅ Scrapes emails from both raw text and `mailto:` links  
+- ✅ Saves results to PostgreSQL with timestamp and source URL  
+- ✅ Displays results in a clean Django dashboard with pagination  
+- ✅ Exports results to `scraped_emails.csv`  
+- ✅ Configurable input list via `urls.txt`  
+- ✅ Docker-ready for reproducible deployment  
 
-```bash
-python3 -m pip install -r requirements.txt
+---
+
+## ⚙️ Tech Stack
+
+- **Language**: Python 3.9  
+- **Framework**: Django  
+- **Database**: PostgreSQL  
+- **Libraries**: `requests`, `BeautifulSoup`, `re`, `csv`  
+- **Web UI**: HTML (Django Template), Pagination  
+- **DevOps**: Docker (with `Dockerfile`)
+
+---
+
+## 🗂️ File Overview
+Webscraper/
+├── scraper.py # Main scraping logic
+├── utils.py # Email extraction (regex)
+├── urls.txt # List of target URLs
+├── scraped_emails.csv # Output CSV file
+├── Dockerfile # Docker config
+├── requirements.txt # Dependencies
+├── .env # Database credentials
+├── manage.py # Django entry point
+├── emailsite/ # Django project config
+└── webapp/ # Django app: models, views, templates
