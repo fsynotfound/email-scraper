@@ -26,15 +26,3 @@ This project is a web-based tool for **automatically extracting email addresses*
 
 ---
 
-## 🗂️ File Overview
-Webscraper/
-├── scraper.py # Main scraping logic
-├── utils.py # Email extraction (regex)
-├── urls.txt # List of target URLs
-├── scraped_emails.csv # Output CSV file
-├── Dockerfile # Docker config
-├── requirements.txt # Dependencies
-├── .env # Database credentials
-├── manage.py # Django entry point
-├── emailsite/ # Django project config
-└── webapp/ # Django app: models, views, templates
