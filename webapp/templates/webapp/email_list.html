@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Scraped Emails</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination a, .pagination span {
+            margin: 0 5px;
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            color: #333;
+        }
+
+        .pagination .current {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scraped Emails</h1>
+
+    <table>
+        <tr>
+            <th>Email</th>
+            <th>Source URL</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for entry in page_obj %}
+        <tr>
+            <td>{{ entry.email }}</td>
+            <td><a href="{{ entry.source_url }}" target="_blank">{{ entry.source_url }}</a></td>
+            <td>{{ entry.timestamp|date:"M d, Y, H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
+</body>
+</html>
