@@ -16,10 +16,10 @@ def scrape_emails_from_url(url):
         response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # 1. 从纯文本中提取邮箱
+        # 1. Extract emails from plain text
         emails_text = extract_emails(soup.get_text())
 
-        # 2. 从 mailto 链接中提取邮箱
+        # 2. Extract emails from mailto links
         emails_links = []
         for a in soup.find_all('a', href=True):
             href = a['href']
@@ -27,11 +27,11 @@ def scrape_emails_from_url(url):
                 email = href.replace('mailto:', '').split('?')[0]
                 emails_links.append(email)
 
-        # 3. 合并并去重
+        # 3. Combine and remove duplicates
         emails = list(set(emails_text + emails_links))
         timestamp = datetime.utcnow().isoformat()
 
-        # 4. 构造结果
+       # 4. Construct the results
         results = []
         for email in emails:
             results.append({
@@ -54,13 +54,13 @@ def main():
         results = scrape_emails_from_url(url)
         all_results.extend(results)
 
-    # 写入 CSV 文件
+    # Write results to a CSV file
     with open("scraped_emails.csv", "w", newline="") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=["email", "source_url", "timestamp"])
         writer.writeheader()
         writer.writerows(all_results)
 
-     # 保存到数据库
+    # Read URLs from the file
     from webapp.models import EmailEntry
     for entry in all_results:
         EmailEntry.objects.create(

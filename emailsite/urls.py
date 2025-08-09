@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# The main routing configuration file for the entire Django project
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('webapp.urls')),  # ✅ 让首页访问你的 app
+    path('', include('webapp.urls')),  # Include all routes from webapp/urls.py for the homepage ("")
 ]

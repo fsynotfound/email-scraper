@@ -5,7 +5,7 @@ from .models import EmailEntry
 def email_list(request):
     emails = EmailEntry.objects.all().order_by('-timestamp')
     
-    paginator = Paginator(emails, 10)  # 每页显示 10 条
+    paginator = Paginator(emails, 10) 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
